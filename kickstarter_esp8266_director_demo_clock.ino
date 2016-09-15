@@ -33,6 +33,7 @@ int nsec=0;
 unsigned long epoch =0;
 boolean first=false;
 boolean newv=false;
+boolean notif=false;
  byte c=0;
 
 const unsigned char cloud [] PROGMEM = {
@@ -117,6 +118,13 @@ nsec=(epoch % 60);
   else{
     tft.print(nsec);
   }
+  if (!notif){
+ buttonState = digitalRead(buttonPin);
+if (buttonState == LOW){
+  notif=true;
+}
+ delay(2000);   
+  }else{
 if (!newv){
   if (!first){
     first=true;
@@ -181,6 +189,8 @@ if (buttonState == LOW){
   tft.fillScreen(CYAN);
   delay(1000);
     }
+  }
+
   }
 }
 
